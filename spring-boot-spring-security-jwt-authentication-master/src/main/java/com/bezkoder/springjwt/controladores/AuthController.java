@@ -17,7 +17,6 @@ import com.bezkoder.springjwt.configuracionSeguridad.fachada.DTO.response.Messag
 import com.bezkoder.springjwt.configuracionSeguridad.fachada.services.AuthImpl;
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

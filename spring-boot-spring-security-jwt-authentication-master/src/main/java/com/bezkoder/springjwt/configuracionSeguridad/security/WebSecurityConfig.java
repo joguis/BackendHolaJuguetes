@@ -9,6 +9,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,20 +18,30 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.bezkoder.springjwt.configuracionSeguridad.security.jwt.AuthEntryPointJwt;
+import com.bezkoder.springjwt.configuracionSeguridad.security.jwt.AuthTokenFilter;
 import com.bezkoder.springjwt.configuracionSeguridad.security.services.UserDetailsServiceImpl;
-import com.bezkoder.springjwt.fitros.GatewayHeaderFilter;
 
 @Configuration
 @EnableMethodSecurity
-public class WebSecurityConfig { 
+// (securedEnabled = true,
+// jsr250Enabled = true,
+// prePostEnabled = true) // by default
+public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   @Autowired
   UserDetailsServiceImpl userDetailsService;
 
   @Autowired
   private AuthEntryPointJwt unauthorizedHandler;
 
-   @Autowired
-  private GatewayHeaderFilter gatewayHeaderFilter;
+  @Bean
+  public AuthTokenFilter authenticationJwtTokenFilter() {
+    return new AuthTokenFilter();
+  }
+
+//  @Override
+//  public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+//    authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//  }
   
   @Bean
   public DaoAuthenticationProvider authenticationProvider() {
@@ -41,6 +53,11 @@ public class WebSecurityConfig {
       return authProvider;
   }
 
+//  @Bean
+//  @Override
+//  public AuthenticationManager authenticationManagerBean() throws Exception {
+//    return super.authenticationManagerBean();
+//  }
   
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
@@ -52,26 +69,33 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
+//  @Override
+//  protected void configure(HttpSecurity http) throws Exception {
+//    http.cors().and().csrf().disable()
+//      .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+//      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//      .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+//      .antMatchers("/api/test/**").permitAll()
+//      .anyRequest().authenticated();
+//
+//    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//  }
   
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-      http.csrf(csrf -> csrf.disable())
-          .addFilterBefore(gatewayHeaderFilter, UsernamePasswordAuthenticationFilter.class)
-          .exceptionHandling(exception -> exception
-              .authenticationEntryPoint(unauthorizedHandler)  
-          )
-          .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-          .authorizeHttpRequests(auth ->
-              auth.requestMatchers("/api/auth/**").permitAll()   // Permite solo acceso a las rutas de autenticación sin necesidad de autenticación
-              .anyRequest().authenticated()  // Requiere autenticación para todas las demás rutas
-          );
+    http.csrf(csrf -> csrf.disable())
+        .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(auth -> 
+          auth.requestMatchers("/api/auth/**").permitAll()
+              .requestMatchers("/api/test/**").permitAll()
+              .anyRequest().authenticated()
+        );
+    
+    http.authenticationProvider(authenticationProvider());
 
-      http.authenticationProvider(authenticationProvider());
-
-      return http.build();
+    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    
+    return http.build();
   }
-
-
 }
-
-
