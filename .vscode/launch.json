@@ -58,6 +58,16 @@
             "projectName": "spring-boot-security-jwt",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-InventarioApplication<inventario>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "co.holajuguetes.inventario.InventarioApplication",
+            "projectName": "inventario",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
