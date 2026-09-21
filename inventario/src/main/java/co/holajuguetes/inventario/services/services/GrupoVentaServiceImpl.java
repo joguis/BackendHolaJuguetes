@@ -3,7 +3,7 @@ package co.holajuguetes.inventario.services.services;
 import co.holajuguetes.inventario.exceptions.ResourceNotFoundException;
 import co.holajuguetes.inventario.models.GrupoVenta;
 import co.holajuguetes.inventario.repositories.GrupoVentaRepository;
-import co.holajuguetes.inventario.services.DTO.response.GrupoVentaResponse;
+import co.holajuguetes.inventario.services.DTO.GrupoVentaResponse;
 import co.holajuguetes.inventario.services.Mappers.GrupoVentaMapper;
 import co.holajuguetes.inventario.services.interfaces.GrupoVentaService;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,8 @@
 package co.holajuguetes.inventario.services.Mappers;
 
 import co.holajuguetes.inventario.models.GrupoVenta;
-import co.holajuguetes.inventario.services.DTO.response.GrupoVentaResponse;
-import co.holajuguetes.inventario.services.DTO.response.GrupoVentaResumenResponse;
+import co.holajuguetes.inventario.services.DTO.GrupoVentaResponse;
+import co.holajuguetes.inventario.services.DTO.GrupoVentaResumenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

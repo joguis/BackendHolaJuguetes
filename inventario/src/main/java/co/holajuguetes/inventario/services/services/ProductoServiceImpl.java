@@ -2,7 +2,7 @@ package co.holajuguetes.inventario.services.services;
 
 import co.holajuguetes.inventario.models.Producto;
 import co.holajuguetes.inventario.repositories.ProductoRepository;
-import co.holajuguetes.inventario.services.DTO.response.ProductoResponse;
+import co.holajuguetes.inventario.services.DTO.ProductoResponse;
 import co.holajuguetes.inventario.services.Mappers.ProductoMapper;
 import co.holajuguetes.inventario.services.interfaces.ProductoService;
 import lombok.RequiredArgsConstructor;

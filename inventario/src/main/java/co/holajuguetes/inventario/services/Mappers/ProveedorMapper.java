@@ -1,7 +1,8 @@
 package co.holajuguetes.inventario.services.Mappers;
 
 import co.holajuguetes.inventario.models.Proveedor;
-import co.holajuguetes.inventario.services.DTO.response.ProveedorResumenResponse;
+import co.holajuguetes.inventario.services.DTO.ProveedorResumenResponse;
+
 import org.springframework.stereotype.Component;
 
 @Component

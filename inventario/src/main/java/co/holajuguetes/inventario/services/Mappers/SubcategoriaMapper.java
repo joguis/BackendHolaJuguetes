@@ -1,7 +1,8 @@
 package co.holajuguetes.inventario.services.Mappers;
 
 import co.holajuguetes.inventario.models.Subcategoria;
-import co.holajuguetes.inventario.services.DTO.response.SubcategoriaResponse;
+import co.holajuguetes.inventario.services.DTO.SubcategoriaResponse;
+
 import org.springframework.stereotype.Component;
 
 @Component

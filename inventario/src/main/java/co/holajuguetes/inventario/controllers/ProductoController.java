@@ -1,47 +1,19 @@
 package co.holajuguetes.inventario.controllers;
 
-import co.holajuguetes.inventario.services.DTO.response.PaginaResponse;
-import co.holajuguetes.inventario.services.DTO.response.ProductoResponse;
-import co.holajuguetes.inventario.services.interfaces.ProductoService;
+import co.holajuguetes.inventario.services.DTO.*;
+import co.holajuguetes.inventario.services.services.InventarioCrudService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/productos")
 @RequiredArgsConstructor
 public class ProductoController {
-
-    private final ProductoService productoService;
-
-    @GetMapping
-    public ResponseEntity<PaginaResponse<ProductoResponse>> listarProductos(
-            @PageableDefault(size = 20, sort = "id") Pageable pageable) {
-        return ResponseEntity.ok(PaginaResponse.fromPage(productoService.listarProductos(pageable)));
-    }
-
-    @GetMapping("/nombre/{nombre}")
-    public ResponseEntity<PaginaResponse<ProductoResponse>> buscarPorNombre(
-            @PathVariable String nombre,
-            @PageableDefault(size = 20, sort = "nombre") Pageable pageable) {
-        return ResponseEntity.ok(PaginaResponse.fromPage(productoService.buscarPorNombre(nombre, pageable)));
-    }
-
-    @GetMapping("/sku/{sku}")
-    public ResponseEntity<PaginaResponse<ProductoResponse>> buscarPorSku(
-            @PathVariable String sku,
-            @PageableDefault(size = 20, sort = "sku") Pageable pageable) {
-        return ResponseEntity.ok(PaginaResponse.fromPage(productoService.buscarPorSku(sku, pageable)));
-    }
-
-    @GetMapping("/activos")
-    public ResponseEntity<PaginaResponse<ProductoResponse>> listarActivos(
-            @PageableDefault(size = 20, sort = "id") Pageable pageable) {
-        return ResponseEntity.ok(PaginaResponse.fromPage(productoService.listarActivos(pageable)));
-    }
+    private final InventarioCrudService service;
+    @PostMapping public ResponseEntity<ProductoResponse> crear(@RequestBody OperacionRequest r) { return ResponseEntity.ok(service.crearProducto(r)); }
+    @GetMapping public ResponseEntity<?> listar(@RequestBody(required = false) OperacionRequest r) { return ResponseEntity.ok(PaginaResponse.fromPage(service.listarProductos(r == null ? new OperacionRequest() : r))); }
+    @PostMapping("/buscar") public ResponseEntity<?> buscar(@RequestBody OperacionRequest r) { return ResponseEntity.ok(PaginaResponse.fromPage(service.buscarProductos(r))); }
+    @PatchMapping public ResponseEntity<ProductoResponse> editar(@RequestBody OperacionRequest r) { return ResponseEntity.ok(service.editarProducto(r)); }
+    @DeleteMapping public ResponseEntity<Void> eliminar(@RequestBody OperacionRequest r) { service.eliminarProducto(r); return ResponseEntity.noContent().build(); }
 }

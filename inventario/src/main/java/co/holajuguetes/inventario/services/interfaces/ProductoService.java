@@ -1,8 +1,9 @@
 package co.holajuguetes.inventario.services.interfaces;
 
-import co.holajuguetes.inventario.services.DTO.response.ProductoResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import co.holajuguetes.inventario.services.DTO.ProductoResponse;
 
 public interface ProductoService {
 

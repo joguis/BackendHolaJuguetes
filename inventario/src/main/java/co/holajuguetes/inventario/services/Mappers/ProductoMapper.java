@@ -1,7 +1,7 @@
 package co.holajuguetes.inventario.services.Mappers;
 
 import co.holajuguetes.inventario.models.Producto;
-import co.holajuguetes.inventario.services.DTO.response.ProductoResponse;
+import co.holajuguetes.inventario.services.DTO.ProductoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

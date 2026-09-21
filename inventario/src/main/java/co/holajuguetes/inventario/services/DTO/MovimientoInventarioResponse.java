@@ -1,4 +1,4 @@
-package co.holajuguetes.inventario.services.DTO.response;
+package co.holajuguetes.inventario.services.DTO;
 
 import co.holajuguetes.inventario.enums.TipoMovimiento;
 import lombok.AllArgsConstructor;

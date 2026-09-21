@@ -1,7 +1,8 @@
 package co.holajuguetes.inventario.services.Mappers;
 
 import co.holajuguetes.inventario.models.MovimientoInventario;
-import co.holajuguetes.inventario.services.DTO.response.MovimientoInventarioResponse;
+import co.holajuguetes.inventario.services.DTO.MovimientoInventarioResponse;
+
 import org.springframework.stereotype.Component;
 
 @Component

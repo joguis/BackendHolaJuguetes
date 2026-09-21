@@ -34,7 +34,7 @@ public class GrupoVenta {
     @Column(name = "grupo_venta_id")
     private Integer id;
 
-    @Column(name = "nombre", nullable = false, length = 150)
+    @Column(name = "nombre", length = 150)
     private String nombre;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -45,7 +45,7 @@ public class GrupoVenta {
     @JoinColumn(name = "subcategoria_id", nullable = false)
     private Subcategoria subcategoria;
 
-    @Column(name = "codigo_barras", nullable = false, unique = true, length = 50)
+    @Column(name = "codigo_barras", unique = true, length = 50)
     private String codigoBarras;
 
     @Column(name = "precio_venta", nullable = false, precision = 10, scale = 2)

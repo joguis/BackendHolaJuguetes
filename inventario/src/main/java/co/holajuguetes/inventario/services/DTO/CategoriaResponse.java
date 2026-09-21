@@ -1,4 +1,4 @@
-package co.holajuguetes.inventario.services.DTO.response;
+package co.holajuguetes.inventario.services.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProveedorResumenResponse {
+public class CategoriaResponse {
     private Integer id;
     private String nombre;
+    private String descripcion;
 }
