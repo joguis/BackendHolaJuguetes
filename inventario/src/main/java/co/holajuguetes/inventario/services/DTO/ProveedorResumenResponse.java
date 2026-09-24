@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class ProveedorResumenResponse {
     private Integer id;
     private String nombre;
+    private String telefono;
+    private String email;
 }

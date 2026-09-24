@@ -15,6 +15,8 @@ public class ProveedorMapper {
         return ProveedorResumenResponse.builder()
                 .id(proveedor.getId())
                 .nombre(proveedor.getNombre())
+                .telefono(proveedor.getTelefono())
+                .email(proveedor.getEmail())
                 .build();
     }
 }
